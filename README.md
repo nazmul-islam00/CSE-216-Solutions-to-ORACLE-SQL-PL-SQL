@@ -5,6 +5,7 @@
 # [Chapter 2](#chapter-2)
 # [Chapter 3](#chapter-3)
 # [Chapter 4](#chapter-4)
+# [Chapter 5](#chapter-5)
 
 # <a name="chapter-1">Chapter 1</a>
 ### No exercises
@@ -190,8 +191,7 @@ ORDER BY
 # [Section 3.4](#section-3.4)
 
 # <a name="section-3.1">Section 3.1</a>
-> a. Print the first three characters and last three characters of all country names. Print in capital 
-letters.<br>
+> a. Print the first three characters and last three characters of all country names. Print in capital letters.<br>
 ```sql
 SELECT
 	UPPER(SUBSTR(COUNTRY_NAME, 1, 3)) AS FIRST_THREE_LETTERS,
@@ -199,9 +199,7 @@ SELECT
 FROM
 	COUNTRIES;
 ```
-> b. Print all employee full names (first name followed by a space then followed by last name). All 
-names should be printed in width of 60 characters and left padded with '*' symbol for names 
-less than 60 characters.<br>
+> b. Print all employee full names (first name followed by a space then followed by last name). All names should be printed in width of 60 characters and left padded with '*' symbol for names less than 60 characters.<br>
 ```sql
 SELECT
 	LPAD(FIRST_NAME || ' ' || LAST_NAME, 60, '*') AS FULL_NAME
@@ -219,8 +217,7 @@ WHERE
 ```
 
 # <a name="section-3.2">Section 3.2</a>
-> a. Print employee last name and number of days employed. Print the second information rounded 
-up to 2 decimal places.<br>
+> a. Print employee last name and number of days employed. Print the second information rounded up to 2 decimal places.<br>
 ```sql
 SELECT
 	LAST_NAME ,
@@ -228,8 +225,7 @@ SELECT
 FROM
 	EMPLOYEES;
 ```
-> b. Print employee last name and number of years employed. Print the second information 
-truncated up to 3 decimal place.<br>
+> b. Print employee last name and number of years employed. Print the second information truncated up to 3 decimal place.<br>
 ```sql
 SELECT
 	LAST_NAME,
@@ -239,8 +235,7 @@ FROM
 ```
 
 # <a name="section-3.3">Section 3.3</a>
-> a. For all employees, find the number of years employed. Print first names and number of years 
-employed for each employee.<br>
+> a. For all employees, find the number of years employed. Print first names and number of years employed for each employee.<br>
 ```sql
 SELECT 
 	FIRST_NAME ,
@@ -248,8 +243,7 @@ SELECT
 FROM
 	EMPLOYEES;
 ```
-> b. Suppose you need to find the number of days each employee worked during the first month of 
-his joining. Write an SQL query to find this information for all employees.<br>
+> b. Suppose you need to find the number of days each employee worked during the first month of his joining. Write an SQL query to find this information for all employees.<br>
 ```sql
 SELECT
 	FIRST_NAME ,
@@ -259,8 +253,7 @@ FROM
 ```
 
 # <a name="section-3.4">Section 3.4</a>
-> a. Print the commission_pct values of all employees whose commission is at least 20%. Use NVL 
-function.<br>
+> a. Print the commission_pct values of all employees whose commission is at least 20%. Use NVL function.<br>
 ```sql
 SELECT
 	EMPLOYEE_ID ,
@@ -270,9 +263,7 @@ FROM
 WHERE
 	NVL(COMMISSION_PCT, 0)>= 0.20;
 ```
-> b. Print the total salary of an employee for 5 years and 6 months period. Print all employee last 
-names along with this salary information. Use NVL function assuming that salary may contain 
-NULL values.<br>
+> b. Print the total salary of an employee for 5 years and 6 months period. Print all employee last names along with this salary information. Use NVL function assuming that salary may contain NULL values.<br>
 ```sql
 SELECT
 	LAST_NAME ,
@@ -298,8 +289,7 @@ FROM
 # [Section 4.3](#section-4.3)
 
 # <a name="section-4.1">Section 4.1</a>
-> a. For all managers, find the number of employees he/she manages. Print the MANAGER_ID 
-and total number of such employees.<br>
+> a. For all managers, find the number of employees he/she manages. Print the MANAGER_ID and total number of such employees.<br>
 ```sql
 SELECT
 	MANAGER_ID ,
@@ -309,8 +299,7 @@ FROM
 GROUP BY
 	MANAGER_ID;
 ```
-> b. For all departments, find the number of employees who get more than 30k salary. Print the 
-DEPARTMENT_ID and total number of such employees.<br>
+> b. For all departments, find the number of employees who get more than 30k salary. Print the DEPARTMENT_ID and total number of such employees.<br>
 ```sql
 SELECT
 	DEPARTMENT_ID ,
@@ -322,10 +311,7 @@ WHERE
 GROUP BY
 	DEPARTMENT_ID;
 ```
-> c. Find the minimum, maximum, and average salary of all departments except 
-DEPARTMENT_ID 80. Print DEPARTMENT_ID, minimum, maximum, and average salary. 
-Sort the results in descending order of average salary first, then maximum salary, then 
-minimum salary. Use column alias to rename column names in output for better display.<br>
+> c. Find the minimum, maximum, and average salary of all departments except DEPARTMENT_ID 80. Print DEPARTMENT_ID, minimum, maximum, and average salary. Sort the results in descending order of average salary first, then maximum salary, then minimum salary. Use column alias to rename column names in output for better display.<br>
 ```sql
 SELECT
 	DEPARTMENT_ID,
@@ -345,8 +331,7 @@ ORDER BY
 ```
 
 # <a name="section-4.2">Section 4.2</a>
-> a. Find for each department, the average salary of the department. Print only those 
-DEPARTMENT_ID and average salary whose average salary is at most 50k.<br>
+> a. Find for each department, the average salary of the department. Print only those DEPARTMENT_ID and average salary whose average salary is at most 50k.<br>
 ```sql
 SELECT
 	DEPARTMENT_ID,
@@ -360,8 +345,7 @@ HAVING
 ```
 
 # <a name="section-4.3">Section 4.3</a>
-> a. Find number of employees in each salary group. Salary groups are considered as follows. 
-Group 1: 0k to <5K, 5k to <10k, 10k to <15k, and so on.<br>
+> a. Find number of employees in each salary group. Salary groups are considered as follows. Group 1: 0k to <5K, 5k to <10k, 10k to <15k, and so on.<br>
 ```sql
 SELECT 
 	TRUNC((SALARY / 5000))+ 1 AS SALARY_GROUP,
@@ -371,8 +355,7 @@ FROM
 GROUP BY
 	TRUNC((SALARY / 5000));
 ```
-> b. Find the number of employees that were hired in each year in each job type. Print year, job id, 
-and total employees hired.<br>
+> b. Find the number of employees that were hired in each year in each job type. Print year, job id, and total employees hired.<br>
 ```sql
 SELECT
 	TO_CHAR(HIRE_DATE, 'YYYY') AS YEAR,
@@ -383,4 +366,148 @@ FROM
 GROUP BY
 	TO_CHAR(HIRE_DATE, 'YYYY'),
 	JOB_ID;
+```
+
+# <a name="chapter-5">Chapter 5</a>
+
+# [Section 5.1](#section-5.1)
+
+# <a name="section-5.1">Section 5.1</a>
+> a. For each employee print last name, salary, and job title.<br>
+```sql
+SELECT
+	E.LAST_NAME,
+	E.SALARY,
+	J.JOB_TITLE
+FROM
+	EMPLOYEES E
+JOIN JOBS J
+ON
+	E.JOB_ID = J.JOB_ID ;
+```
+> b. For each department, print department name and country name it is situated in. <br>
+```sql
+SELECT
+	D.DEPARTMENT_NAME ,
+	C.COUNTRY_NAME
+FROM
+	DEPARTMENTS D
+JOIN LOCATIONS L ON
+	D.LOCATION_ID = L.LOCATION_ID
+JOIN COUNTRIES C ON
+	L.COUNTRY_ID = C.COUNTRY_ID;
+```
+> c. For each country, finds total number of departments situated in the country.<br>
+```sql
+SELECT
+	C.COUNTRY_NAME,
+	COUNT(*) AS NUMBER_OF_DEPARTMENTS_IN_THE_COUNTRY
+FROM
+	COUNTRIES C
+JOIN LOCATIONS L ON
+	L.COUNTRY_ID = C.COUNTRY_ID
+JOIN DEPARTMENTS D ON
+	D.LOCATION_ID = L.LOCATION_ID
+GROUP BY
+	C.COUNTRY_NAME;
+```
+> d. For each employee, finds the number of job switches of the employee.<br>
+```sql
+SELECT
+	E.EMPLOYEE_ID,
+	COUNT(JH.EMPLOYEE_ID) AS JOB_SWITCHES
+FROM
+	EMPLOYEES E
+LEFT JOIN JOB_HISTORY JH ON
+	E.EMPLOYEE_ID = JH.EMPLOYEE_ID
+GROUP BY
+	E.EMPLOYEE_ID;
+```
+> e. For each department and job types, find the total number of employees working. Print department names, job titles, and total employees working.<br>
+```sql
+SELECT
+	D.DEPARTMENT_NAME,
+	J.JOB_TITLE,
+	COUNT(*)
+FROM
+	EMPLOYEES E
+JOIN DEPARTMENTS D ON
+	E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN JOBS J ON
+	E.JOB_ID = J.JOB_ID
+GROUP BY
+	D.DEPARTMENT_NAME ,
+	J.JOB_TITLE;
+```
+> f. For each employee, finds the total number of employees those were hired before him/her. Print employee last name and total employees.<br>
+```sql
+SELECT
+	E1.LAST_NAME,
+	COUNT(E2.EMPLOYEE_ID) AS NUMBER_OF_EMPLOYEES_HIRED_BEFORE
+FROM
+	EMPLOYEES E1
+LEFT JOIN EMPLOYEES E2 ON
+	E1.HIRE_DATE>E2.HIRE_DATE
+GROUP BY
+	E1.EMPLOYEE_ID,
+	E1.LAST_NAME;
+```
+> g. For each employee, finds the total number of employees those were hired before him/her and those were hired after him/her. Print employee last name, total employees hired before him, and total employees hired after him.<br>
+```sql
+SELECT
+	E1.LAST_NAME,
+	COUNT(DISTINCT E2.EMPLOYEE_ID) AS NUMBER_OF_EMPLOYEES_HIRED_BEFORE,
+	COUNT(DISTINCT E3.EMPLOYEE_ID) AS NUMBER_OF_EMPLOYEES_HIRED_AFTER
+FROM
+	EMPLOYEES E1
+LEFT JOIN EMPLOYEES E2 ON
+	E1.HIRE_DATE>E2.HIRE_DATE
+LEFT JOIN EMPLOYEES E3 ON
+	E1.HIRE_DATE<E3.HIRE_DATE
+GROUP BY
+	E1.EMPLOYEE_ID,
+	E1.LAST_NAME;
+```
+> h. Find the employees having salaries greater than at least three other employees<br>
+```sql
+SELECT
+	E1.EMPLOYEE_ID
+FROM
+	EMPLOYEES E1
+JOIN EMPLOYEES E2 ON
+	E1.SALARY>E2.SALARY
+GROUP BY
+	E1.EMPLOYEE_ID
+HAVING
+	COUNT(E2.EMPLOYEE_ID)>= 3;
+```
+> i. For each employee, find his rank, i.e., position with respect to salary. The highest salaried employee should get rank 1 and lowest salaried employee should get the last rank. Employees with same salary should get same rank value. Print employee last names and his/he rank.<br>
+```sql
+SELECT
+	E1.LAST_NAME,
+	COUNT(DISTINCT E2.SALARY)+ 1 AS RANK
+FROM
+	EMPLOYEES E1
+LEFT JOIN EMPLOYEES E2 ON
+	E1.SALARY<E2.SALARY
+GROUP BY
+	E1.EMPLOYEE_ID,
+	E1.LAST_NAME;
+```
+> j. Finds the names of employees and their salaries for the top three highest salaried employees. The number of employees in your output should be more than three if there are employees with same salary.<br>
+```sql
+SELECT
+	E1.FIRST_NAME || ' ' || E1.LAST_NAME AS NAME,
+	E1.SALARY
+FROM
+	EMPLOYEES E1
+LEFT JOIN EMPLOYEES E2 ON
+	E1.SALARY<E2.SALARY
+GROUP BY
+	E1.EMPLOYEE_ID,
+	E1.FIRST_NAME,
+	E1.LAST_NAME,
+	E1.SALARY
+HAVING
+	COUNT(DISTINCT E2.SALARY)<3;
 ```
