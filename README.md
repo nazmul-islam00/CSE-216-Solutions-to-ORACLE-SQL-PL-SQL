@@ -1,12 +1,13 @@
 # CSE-216-Solutions-to-ORACLE-SQL-PL-SQL
-### This repository contains solutions to the book "A Brief Introduction to ORACLE SQL/PL-SQL" by Sukarna Barua sir.
+### This repository contains solutions to the book "A Brief Introduction to ORACLE SQL/PL-SQL" by Prof. Sukarna Barua sir.
 
 # [Chapter 1](#chapter-1)
 # [Chapter 2](#chapter-2)
 # [Chapter 3](#chapter-3)
 # [Chapter 4](#chapter-4)
 # [Chapter 5](#chapter-5)
-# [Chapter 6](#chapter-64)
+# [Chapter 6](#chapter-6)
+# [Chapter 7](#chapter-7)
 
 # <a name="chapter-1">Chapter 1</a>
 ### No exercises
@@ -727,3 +728,57 @@ WHERE
 	WHERE
 		E2.JOB_ID = E1.JOB_ID );
 ```
+
+# <a name="chapter-7">Chapter 7</a>
+
+# [Section 7.1](#section-7.1)
+
+# <a name="section-7.1">Section 7.1</a>
+> a. Find EMPLOYEE_ID of those employees who are not managers. Use minus operator to perform this.<br>
+```sql
+(
+SELECT
+	EMPLOYEE_ID
+FROM
+	EMPLOYEES)
+MINUS
+(
+SELECT
+	DISTINCT MANAGER_ID
+FROM
+	EMPLOYEES);
+```
+> b. Find last names of those employees who are not managers. Use minus operator to perform this.<br>
+```sql
+SELECT
+	LAST_NAME
+FROM
+	EMPLOYEES
+WHERE
+	EMPLOYEE_ID IN ((
+	SELECT
+		EMPLOYEE_ID
+	FROM
+		EMPLOYEES)
+MINUS
+(
+	SELECT
+		DISTINCT MANAGER_ID
+	FROM
+		EMPLOYEES));
+```
+> c. Find the LOCATION_ID of those locations having no departments.<br>
+```sql
+(
+SELECT
+	LOCATION_ID
+FROM
+	LOCATIONS)
+MINUS
+(
+SELECT
+	LOCATION_ID
+FROM
+	DEPARTMENTS);
+```
+
