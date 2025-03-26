@@ -8,6 +8,7 @@
 # [Chapter 5](#chapter-5)
 # [Chapter 6](#chapter-6)
 # [Chapter 7](#chapter-7)
+# [Chapter 8](#chapter-8)
 
 # <a name="chapter-1">Chapter 1</a>
 ### No exercises
@@ -191,6 +192,7 @@ ORDER BY
 # [Section 3.2](#section-3.2)
 # [Section 3.3](#section-3.3)
 # [Section 3.4](#section-3.4)
+# [Section 3.5](#section-3.5)
 
 # <a name="section-3.1">Section 3.1</a>
 > a. Print the first three characters and last three characters of all country names. Print in capital letters.<br>
@@ -284,7 +286,7 @@ FROM
 	EMPLOYEES;
 ```
 
-# <a name="chapter-3">Chapter 3</a>
+# <a name="chapter-4">Chapter 4</a>
 
 # [Section 4.1](#section-4.1)
 # [Section 4.2](#section-4.2)
@@ -782,3 +784,121 @@ FROM
 	DEPARTMENTS);
 ```
 
+# <a name="chapter-8">Chapter 8</a>
+
+# [Section 8.1](#section-8.1)
+# [Section 8.2](#section-8.2)
+# [Section 8.3](#section-8.3)
+
+# <a name="section-8.1">Section 8.1</a>
+### No exercises
+
+# <a name="section-8.2">Section 8.2</a>
+```sql
+CREATE TABLE TEMP_EMPLOYEES
+AS
+SELECT
+	*
+FROM
+	EMPLOYEES;
+
+ALTER TABLE TEMP_EMPLOYEES 
+MODIFY COMMISSION_PCT NUMBER(8,2);
+
+DROP TABLE TEMP_EMPLOYEES;
+
+CREATE TABLE TEMP_LOCATIONS
+AS
+SELECT
+	*
+FROM
+	LOCATIONS;
+
+DROP TABLE TEMP_LOCATIONS;
+```
+> a. Update COMMISSION_PCT value to 0 for those employees who have NULL in that column.<br>
+```sql
+UPDATE
+	TEMP_EMPLOYEES
+SET
+	COMMISSION_PCT = 0
+WHERE
+	COMMISSION_PCT IS NULL;
+```
+> b. Update salary of all employees to the maximum salary of the department in which he/she works.<br>
+```sql
+UPDATE
+	TEMP_EMPLOYEES TE
+SET
+	SALARY = (
+	SELECT
+		MAX(E.SALARY)
+	FROM
+		EMPLOYEES E
+	WHERE
+		E.DEPARTMENT_ID = TE.DEPARTMENT_ID);
+```
+> c. Update COMMISSION_PCT to 𝑁 times for each employee where 𝑁 is the number of employees he/she manages. When 𝑁 = 0, keep the old value of COMMISSION_PCT column.<br>
+```sql
+UPDATE
+	TEMP_EMPLOYEES TE
+SET
+	COMMISSION_PCT = ROUND(NVL(COMMISSION_PCT *(
+	SELECT
+		COUNT(*)
+	FROM
+		EMPLOYEES E1
+	JOIN EMPLOYEES E2 ON
+		E2.MANAGER_ID = E1.EMPLOYEE_ID
+	GROUP BY
+		E1.EMPLOYEE_ID
+	HAVING
+		E1.EMPLOYEE_ID = TE.EMPLOYEE_ID), COMMISSION_PCT), 2)
+WHERE
+	TE.EMPLOYEE_ID IN (
+	SELECT
+		DISTINCT E1.MANAGER_ID
+	FROM
+		EMPLOYEES E1);
+```
+> d. Update the hiring dates of all employees to the first day of the same year. Do not change this for those employees who joined on or after year 2000.<br>
+```sql
+UPDATE
+	TEMP_EMPLOYEES
+SET
+	HIRE_DATE = TRUNC(HIRE_DATE, 'YEAR')
+WHERE
+	HIRE_DATE <'01-JAN-2000';
+```
+
+# <a name="section-8.3">Section 8.3</a>
+> a. Delete those employees who earn less than 5k.<br>
+```sql
+DELETE
+FROM
+	TEMP_EMPLOYEES
+WHERE
+	SALARY<5000;
+```
+> b. Delete those locations having no departments.<br>
+```sql
+DELETE
+FROM
+	TEMP_LOCATIONS
+WHERE
+	LOCATION_ID NOT IN (
+	SELECT
+		DISTINCT L.LOCATION_ID
+	FROM
+		LOCATIONS L
+	JOIN DEPARTMENTS D ON
+		L.LOCATION_ID = D.LOCATION_ID);
+```
+> c. Delete those employees from the EMPLOYEES table who joined before the year 1997.<br> 
+```sql
+DELETE
+FROM
+	TEMP_EMPLOYEES
+WHERE
+	HIRE_DATE<'01-JAN-1997';
+```
