@@ -20,7 +20,7 @@ GROUP BY
 		WHEN SALARY<15000 THEN 'A'
 		ELSE 'A+'
 	END
-)
+);
 
 --B
 --Calculate the number of employees in different salary grades for each department using DECODE instead of CASE. 
